@@ -21,6 +21,13 @@ jobs:
         run:  npm install
       - name: Trivy file scan
         run: trivy fs .> trivyfs.txt
+      - name: docker build and push
+        run: docker build -t my-docker-image .
+             docker my-docker-image chinmai1103/my-docker-image:latest
+             docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+             docker push chinmai1103/my-docker-image:latest
+        env:
+          DOCKER_CLI_ACI: 1
           
       
      
