@@ -32,6 +32,8 @@ jobs:
       - name: Image Scan
         run: trivy image chinmai1103/my-docker-image:latest > trivyimage.txt
 
+        
+
           
           
       
