@@ -31,8 +31,18 @@ jobs:
           DOCKER_CLI_ACI: 1
       - name: Image Scan
         run: trivy image chinmai1103/my-docker-image:latest > trivyimage.txt
-
         
+  deploy:
+   needs: build-analyze-scan
+   runs-on: [self-hosted]
+   steps:
+      - name: docker pull image
+        run: docker pull chinmai1103/my-docker-image:latest
+      - name: Image Scan
+        run: trivy image chinmai1103/my-docker-image:latest > trivyimagedeploy.txt
+      - name: deploy image to container
+        run: docker run -d --name my-container -p 3000:3000 chinmai1103/my-docker-image:latest
+   
 
           
           
