@@ -29,7 +29,8 @@ jobs:
              docker push chinmai1103/my-docker-image:latest
         env:
           DOCKER_CLI_ACI: 1
-
+      - name: Image Scan
+        run: trivy image chinmai1103/my-docker-image:latest > trivyimage.txt
 
           
           
